@@ -224,6 +224,7 @@ bullets = []  # Define bullets list here
 spaceship_x = WIDTH - spacehip_img.get_width() - 640
 spaceship_y = (HEIGHT - spacehip_img.get_height()) // 2
 background_img = pygame.image.load('assets/images/background.png').convert()
+background_img = pygame.transform.scale(background_img, (WIDTH, HEIGHT))  
 run = True
 while run:
     #screen.fill('gray')
@@ -246,8 +247,13 @@ while run:
             w.draw()
             if not pz:
                 w.update()
+                if w.x_pos < spaceship_x:  # Check if the word has passed the spaceship
+                    lives -= 1  # Decrease lives count
+                    word_objects.remove(w)  # Remove the word from the list
+                    break  # Break the loop to avoid unnecessary checks for other words
             if w.x_pos < -200:
                 word_objects.remove(w)
+
     if len(word_objects) <= 0 and not pz:
         level += 1
         new_level = True
@@ -262,7 +268,7 @@ while run:
     for bullet in bullets[:]:
         bullet.update()
         pygame.draw.circle(screen, (255, 255, 255), bullet.rect.center, 5)  # Adjust bullet size as needed
-        if bullet.rect.right > 1000:
+        if bullet.rect.right > WIDTH:
             bullets.remove(bullet)
 
         # Collision detection between bullets and words
