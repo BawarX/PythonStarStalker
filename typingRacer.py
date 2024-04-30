@@ -23,7 +23,7 @@ len_indexes.append(len(wordlist))
 WIDTH = 800
 HEIGHT = 600
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
-pygame.display.set_caption('Typing Racer!')
+pygame.display.set_caption('Star Stalker!')
 surface = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
 timer = pygame.time.Clock()
 fps = 60
